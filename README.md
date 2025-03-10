@@ -45,7 +45,6 @@ WanderLust is a simple MERN travel blog website ✈ This project is aimed to hel
 | Jenkins Master | <a href="#Jenkins">Install and configure Jenkins</a>     |
 | eksctl | <a href="#EKS">Install eksctl</a>     |
 | Argocd | <a href="#Argo">Install and configure ArgoCD</a>     |
-| Jenkins-Worker Setup | <a href="#Jenkins-worker">Install and configure Jenkins Worker Node</a>     |
 | OWASP setup | <a href="#Owasp">Install and configure OWASP</a>     |
 | SonarQube | <a href="#Sonar">Install and configure SonarQube</a>     |
 | Email Notification Setup | <a href="#Mail">Email notification setup</a>     |
@@ -147,55 +146,7 @@ sudo apt-get install jenkins -y
                        --ssh-access \
                        --ssh-public-key=eks-nodegroup-key 
   ```
-> [!Note]
->  Make sure the ssh-public-key "eks-nodegroup-key is available in your aws account"
-#
-- <b id="Jenkins-worker">Setting up jenkins worker node</b>
-  - Create a new EC2 instance (Jenkins Worker) with 2CPU, 8GB of RAM (t2.large) and 29 GB of storage and install java on it
-  ```bash
-  sudo apt update -y
-  sudo apt install fontconfig openjdk-17-jre -y
-  ```
-  - Create an IAM role with <mark>administrator access</mark> attach it to the jenkins worker node <mark>Select Jenkins worker node EC2 instance --> Actions --> Security --> Modify IAM role</mark>
-  ![image](https://github.com/user-attachments/assets/1a9060db-db11-40b7-86f0-47a65e8ed68b)
 
-  - Configure AWSCLI (<a href="https://github.com/DevMadhup/DevOps-Tools-Installations/blob/main/AWSCLI/AWSCLI.sh">Setup AWSCLI</a>)
-  ```bash
-  sudo su
-  ```
-  ```bash
-  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-  sudo apt install unzip
-  unzip awscliv2.zip
-  sudo ./aws/install
-  aws configure
-  ```
-#
-  - <b>generate ssh keys (Master machine) to setup jenkins master-slave</b>
-  ```bash
-  ssh-keygen
-  ```
-  ![image](https://github.com/user-attachments/assets/0c8ecb74-1bc5-46f9-ad55-1e22e8092198)
-#
-  - <b>Now move to directory where your ssh keys are generated and copy the content of public key and paste to authorized_keys file of the Jenkins worker node.</b>
-#
-  - <b>Now, go to the jenkins master and navigate to <mark>Manage jenkins --> Nodes</mark>, and click on Add node </b>
-    - <b>name:</b> Node
-    - <b>type:</b> permanent agent
-    - <b>Number of executors:</b> 2
-    - Remote root directory
-    - <b>Labels:</b> Node
-    - <b>Usage:</b> Only build jobs with label expressions matching this node
-    - <b>Launch method:</b> Via ssh
-    - <b>Host:</b> \<public-ip-worker-jenkins\>
-    - <b>Credentials:</b> <mark>Add --> Kind: ssh username with private key --> ID: Worker --> Description: Worker --> Username: root --> Private key: Enter directly --> Add Private key</mark>
-    - <b>Host Key Verification Strategy:</b> Non verifying Verification Strategy
-    - <b>Availability:</b> Keep this agent online as much as possible
-#
-  - And your jenkins worker node is added
-  ![image](https://github.com/user-attachments/assets/cab93696-a4e2-4501-b164-8287d7077eef)
-
-# 
 - <b id="docker">Install docker (Jenkins Worker)</b>
 
 ```bash
