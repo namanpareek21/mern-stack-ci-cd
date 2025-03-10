@@ -19,7 +19,7 @@ pipeline {
         stage('Git: Code Checkout') {
             steps {
                 script{
-                    code_checkout("https://github.com/namanpareek21/megaproject.git","main")
+                    code_checkout("https://github.com/namanpareek21/mern-stack-ci-cd.git","main")
                 }
             }
         }
@@ -68,7 +68,7 @@ pipeline {
                         git commit -m "Updated environment variables"
                         
                         echo "Pushing changes to github: "
-                        git push https://github.com/namanpareek21/megaproject.git main
+                        git push https://github.com/namanpareek21/mern-stack-ci-cd.git main
                     '''
                     }
                 }
