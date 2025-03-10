@@ -77,7 +77,7 @@ sudo apt-get install docker.io -y
 sudo usermod -aG docker ubuntu && newgrp docker
 ```
 #
-- <b id="Jenkins">Install and configure Jenkins (Master machine)</b>
+- <b id="Jenkins">Install and configure Jenkins </b>
 ```bash
 sudo apt update -y
 sudo apt install fontconfig openjdk-17-jre -y
@@ -92,7 +92,7 @@ echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" \
 sudo apt-get update -y
 sudo apt-get install jenkins -y
 ```
-- <b>Now, access Jenkins Master on the browser on port 8080 and configure it</b>.
+- <b>Now, access Jenkins on the browser on port 8080 and configure it</b>.
 #
 - <b id="EKS">Create EKS Cluster on AWS (Master machine)</b>
   - IAM user with **access keys and secret access keys**
@@ -150,13 +150,13 @@ sudo apt-get install jenkins -y
 > [!Note]
 >  Make sure the ssh-public-key "eks-nodegroup-key is available in your aws account"
 #
-- <b id="Jenkins-worker">Setting up jenkins worker node</b>
-  - Create a new EC2 instance (Jenkins Worker) with 2CPU, 8GB of RAM (t2.large) and 29 GB of storage and install java on it
+- <b id="Jenkins-worker">Setting up jenkins </b>
+  - Create a new EC2 instance  with 2CPU, 8GB of RAM (t2.large) and 29 GB of storage and install java on it
   ```bash
   sudo apt update -y
   sudo apt install fontconfig openjdk-17-jre -y
   ```
-  - Create an IAM role with <mark>administrator access</mark> attach it to the jenkins worker node <mark>Select Jenkins worker node EC2 instance --> Actions --> Security --> Modify IAM role</mark>
+  - Create an IAM role with <mark>administrator access</mark> attach it to the jenkins <mark>Select Jenkins EC2 instance --> Actions --> Security --> Modify IAM role</mark>
   ![image](https://github.com/user-attachments/assets/1a9060db-db11-40b7-86f0-47a65e8ed68b)
 
   - Configure AWSCLI (<a href="https://github.com/DevMadhup/DevOps-Tools-Installations/blob/main/AWSCLI/AWSCLI.sh">Setup AWSCLI</a>)
@@ -171,7 +171,7 @@ sudo apt-get install jenkins -y
   aws configure
   ```
 #
-  - <b>generate ssh keys (Master machine) to setup jenkins master-slave</b>
+  - <b>generate ssh keys (Master machine) to setup jenkins</b>
   ```bash
   ssh-keygen
   ```
